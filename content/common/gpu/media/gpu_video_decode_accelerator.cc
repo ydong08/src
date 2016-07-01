@@ -31,6 +31,8 @@
 #if defined(OS_WIN)
 #include "base/win/windows_version.h"
 #include "content/common/gpu/media/dxva_video_decode_accelerator.h"
+#elif defined(IMX_PLATFORM)
+#include "content/common/gpu/media/imxvpu_video_decode_accelerator.h"
 #elif defined(OS_MACOSX)
 #include "content/common/gpu/media/vt_video_decode_accelerator.h"
 #elif defined(OS_CHROMEOS)
@@ -180,6 +182,8 @@ GpuVideoDecodeAccelerator::GetSupportedProfiles() {
   profiles = VTVideoDecodeAccelerator::GetSupportedProfiles();
 #elif defined(OS_ANDROID)
   profiles = AndroidVideoDecodeAccelerator::GetSupportedProfiles();
+#elif defined(IMX_PLATFORM)
+  profiles = ImxVpuVideoDecodeAccelerator::GetSupportedProfiles();
 #endif
   return GpuVideoAcceleratorUtil::ConvertMediaToGpuDecodeProfiles(profiles);
 }
@@ -346,6 +350,7 @@ void GpuVideoDecodeAccelerator::Initialize(
   // same as the order of querying supported profiles of VDAs.
   const GpuVideoDecodeAccelerator::CreateVDAFp create_vda_fps[] = {
       &GpuVideoDecodeAccelerator::CreateDXVAVDA,
+      &GpuVideoDecodeAccelerator::CreateImxVpuVDA,
       &GpuVideoDecodeAccelerator::CreateV4L2VDA,
       &GpuVideoDecodeAccelerator::CreateV4L2SliceVDA,
       &GpuVideoDecodeAccelerator::CreateVaapiVDA,
@@ -382,6 +387,18 @@ GpuVideoDecodeAccelerator::CreateDXVAVDA() {
   } else {
     NOTIMPLEMENTED() << "HW video decode acceleration not available.";
   }
+#endif
+  return decoder.Pass();
+}
+
+scoped_ptr<media::VideoDecodeAccelerator>
+GpuVideoDecodeAccelerator::CreateImxVpuVDA() {
+  scoped_ptr<media::VideoDecodeAccelerator> decoder;
+#if defined(IMX_PLATFORM)
+  DVLOG(0) << "Using the i.MX6 VPU decode accelerator";
+  decoder.reset(new ImxVpuVideoDecodeAccelerator(
+      stub_->decoder()->AsWeakPtr(),
+      make_context_current_));
 #endif
   return decoder.Pass();
 }

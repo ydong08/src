@@ -803,6 +803,40 @@
         'common/gpu/media/avda_state_provider.h',
       ],
     }],
+    ['target_arch == "arm" and imx_platform == 1', {
+      'dependencies': [
+        '../ui/gl/gl.gyp:gl',
+      ],
+      'variables': {
+        'conditions': [
+          ['sysroot!=""', {
+            'pkg-config': '../build/linux/pkg-config-wrapper "<(sysroot)" "<(target_arch)"',
+          }, {
+            'pkg-config': 'pkg-config'
+          }],
+        ],
+      },
+      'sources': [
+        'common/gpu/media/imx_gl_viv_direct_texture.cc',
+        'common/gpu/media/imx_gl_viv_direct_texture.h',
+        'common/gpu/media/imxvpucodec_fslwrapper.c',
+        'common/gpu/media/imxvpucodec.h',
+        'common/gpu/media/imxvpucodec_platform_chromium.cc',
+        'common/gpu/media/imxvpucodec_platform_chromium.h',
+        'common/gpu/media/imxvpucodec_platform.h',
+        'common/gpu/media/imxvpu_video_decode_accelerator.cc',
+        'common/gpu/media/imxvpu_video_decode_accelerator.h',
+      ],
+      'defines': ['IMX_PLATFORM'],
+      'cflags': [
+        '<!@(<(pkg-config) --cflags libfslvpuwrap)',
+      ],
+      'link_settings': {
+        'libraries': [
+          '-lfslvpuwrap',
+        ],
+      },
+    }],
     ['OS=="android" and enable_webrtc==1', {
       'dependencies': [
         '../third_party/libyuv/libyuv.gyp:libyuv',

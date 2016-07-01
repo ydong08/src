@@ -480,7 +480,8 @@ const char kSoftwareRenderingListJson[] = LONG_STRING_CONST(
         "all"
       ]
     },
-    {
+    // 48 disabled for i.MX6 integration
+/*    {
       "id": 48,
       "description": "Accelerated video decode is unavailable on Linux",
       "cr_bugs": [137247],
@@ -490,7 +491,7 @@ const char kSoftwareRenderingListJson[] = LONG_STRING_CONST(
       "features": [
         "accelerated_video_decode"
       ]
-    },
+    },*/
     {
       "id": 49,
       "description": "NVidia GeForce GT 650M can cause the system to hang with flash 3D",

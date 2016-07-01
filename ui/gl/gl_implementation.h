@@ -97,7 +97,7 @@ GL_EXPORT bool HasDesktopGLFeatures();
 GLImplementation GetNamedGLImplementation(const std::string& name);
 
 // Get the name of a GL implementation.
-const char* GetGLImplementationName(GLImplementation implementation);
+GL_EXPORT const char* GetGLImplementationName(GLImplementation implementation);
 
 // Add a native library to those searched for GL entry points.
 void AddGLNativeLibrary(base::NativeLibrary library);
@@ -116,7 +116,7 @@ GL_EXPORT void SetGLGetProcAddressProc(GLGetProcAddressProc proc);
 // and when querying functions from the EGL library supplied by Android, it may
 // return a function that prints a log message about the function being
 // unsupported.
-void* GetGLProcAddress(const char* name);
+GL_EXPORT void* GetGLProcAddress(const char* name);
 
 // Return information about the GL window system binding implementation (e.g.,
 // EGL, GLX, WGL). Returns true if the information was retrieved successfully.

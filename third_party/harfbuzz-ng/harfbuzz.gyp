@@ -8,7 +8,7 @@
   ],
   'variables': {
     'conditions': [
-      ['OS=="linux" and chromeos==1', {
+      ['OS=="linux" and (chromeos==1 or imx_platform==1)', {
         # Since version 1.31.0, pangoft2 which we depend on pulls in harfbuzz
         # anyways. However, we want to have control of the version of harfbuzz
         # we use, so don't use system harfbuzz unless we are building for

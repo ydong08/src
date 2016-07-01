@@ -415,9 +415,6 @@ const char kGpuDriverBugListJson[] = LONG_STRING_CONST(
       "id": 34,
       "cr_bugs": [179250, 229643, 230896],
       "description": "Share groups are not working on (older?) Vivante drivers",
-      "os": {
-        "type": "android"
-      },
       "gl_extensions": ".*GL_VIV_shader_binary.*",
       "features": [
         "use_virtualized_gl_contexts"

@@ -1256,6 +1256,9 @@
     # Use system ICU instead of bundled one.
     'use_system_icu%' : 0,
 
+    # Whether or not the target platform is based on the i.MX SoC
+    'imx_platform%': 1,
+
     # Default to enabled PIE; this is important for ASLR but we may need to be
     # able to turn it off for various reasons.
     'linux_disable_pie%': 0,

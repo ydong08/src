@@ -78,6 +78,7 @@ class GpuVideoDecodeAccelerator
   class MessageFilter;
 
   scoped_ptr<media::VideoDecodeAccelerator> CreateDXVAVDA();
+  scoped_ptr<media::VideoDecodeAccelerator> CreateImxVpuVDA();
   scoped_ptr<media::VideoDecodeAccelerator> CreateV4L2VDA();
   scoped_ptr<media::VideoDecodeAccelerator> CreateV4L2SliceVDA();
   scoped_ptr<media::VideoDecodeAccelerator> CreateVaapiVDA();
